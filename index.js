@@ -25,6 +25,6 @@ app.get('/:key', async (req, res) => {
 app.listen(port, async () => {
   await client.connect()
   let db = client.db("main");
-  collection = await db.createCollection('kv-api')
+  collection = db.collection('kv-api')
   console.log(`Example app listening on port ${port}`)
 })
