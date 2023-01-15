@@ -14,6 +14,7 @@ app.post('/:key', async (req, res) => {
     await redisCLient.connect();
     await redisCLient.set(req.params.key , val);
     await redisCLient.disconnect();
+    res.send('ok')
 })
 
 app.get('/:key', async (req, res) => {
