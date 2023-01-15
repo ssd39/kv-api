@@ -1,10 +1,10 @@
 const express = require('express')
-const mongo = require('mongodb');
+const MongoClient = require('mongodb').MongoClient;
 const app = express()
 const port = process.env.PORT || 3000
 const mongoUrl = process.env.MONGO_URL
 
-let client;
+const client = new MongoClient(mongoUrl);
 let collection;
 app.use(express.json());
 
@@ -23,9 +23,8 @@ app.get('/:key', async (req, res) => {
 })
 
 app.listen(port, async () => {
-  client = await mongo.MongoClient.connect(mongoUrl)
+  await client.connect()
   let db = client.db("main");
-  collection = db.createCollection("kv-api")
-  console.log(collection)
+  collection = await db.createCollection('kv-api')
   console.log(`Example app listening on port ${port}`)
 })
