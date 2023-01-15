@@ -26,5 +26,6 @@ app.listen(port, async () => {
   client = await mongo.MongoClient.connect(mongoUrl)
   let db = client.db("main");
   collection = db.createCollection("kv-api")
+  console.log(collection)
   console.log(`Example app listening on port ${port}`)
 })
